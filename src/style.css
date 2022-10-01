@@ -6,6 +6,16 @@
 body {
   font-family: sans-serif;
 }
+
+i {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
 /* Navbar*/
 .navbar {
   display: flex;
