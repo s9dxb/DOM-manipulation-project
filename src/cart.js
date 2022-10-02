@@ -12,19 +12,19 @@ let generateCartItems = () => {
   if (basket.length !== 0) {
     return (ShoppingCart.innerHTML = basket
       .map((x) => {
-        console.log(x);
         let { id, item } = x;
         let search = shopItemsData.find((y) => y.id === id) || [];
+        let { img, name, price } = search; //Destructuring the object
         return `
         <div class="cart-item">
-        <img width="100" src=${search.img} alt=""/>
+        <img width="100" src=${img} alt=""/>
             <div class="details">
                 <div class="title-price-x">
                     <h4 class="title-price">
-                        <p>${search.name}</p>
-                        <p class="cart-item-price">$ ${search.price}</p>
+                        <p>${name}</p>
+                        <p class="cart-item-price">$ ${price}</p>
                     </h4>
-                    <i class="bi bi-x-lg"></i>
+                    <i onclick="removeItem(${id})" class="bi bi-x-lg"></i>
 
                 </div>
                         <div class="buttons">
@@ -89,4 +89,41 @@ let update = (id) => {
   // console.log(search.item);
   document.getElementById(id).innerHTML = search.item;
   calculation();
+  TotalAmount();
 };
+
+let removeItem = (id) => {
+  let selectedItem = id;
+  //   console.log(selectedItem.id);
+  basket = basket.filter((x) => x.id !== selectedItem.id); //to remove the item and update the basket
+  generateCartItems();
+  calculation();
+  TotalAmount();
+  localStorage.setItem("data", JSON.stringify(basket));
+};
+
+let clearCart = () => {
+  basket = []; //what ever we have in the basket is gonna be removed by the ClearCart function
+  generateCartItems();
+  calculation();
+  localStorage.setItem("data", JSON.stringify(basket));
+};
+
+let TotalAmount = () => {
+  if (basket.legth !== 0) {
+    let amount = basket
+      .map((x) => {
+        let { item, id } = x;
+        let search = shopItemsData.find((y) => y.id === id) || [];
+        return item * search.price;
+      })
+      .reduce((x, y) => x + y, 0); //we add the 0 because the statement should start from 0
+    // console.log(amount);
+    label.innerHTML = `
+    <h2>Total Bill : ${amount}</h2>
+    <button class="checkout">Checkout</button>
+    <button onclick="clearCart()" class="removeAll">Clear Cart</button>
+    `;
+  } else return;
+};
+TotalAmount();
