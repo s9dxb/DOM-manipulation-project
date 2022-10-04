@@ -21,6 +21,8 @@ let generateShop = () => {
               ${search.item === undefined ? 0 : search.item}
               </div>
               <i onclick="increment(${id})" class="bi bi-plus-lg"></i>
+              <input id="toggle-heart" type="checkbox" />
+              <label for="toggle-heart">❤</label>
             </div>
           </div>
         </div>

@@ -55,6 +55,7 @@ a {
 @media (max-width: 1000px) {
   .shop {
     grid-template-columns: repeat(2, 223px);
+    margin-bottom: 50px;
   }
 }
 @media (max-width: 500px) {
@@ -146,6 +147,7 @@ img,
   width: 400px;
   height: 100%;
 }
+
 .title-price-x {
   display: flex;
   justify-content: space-between;
@@ -163,3 +165,26 @@ img,
   border-radius: 4px;
   padding: 3px 6px;
 }
+/*heart icone*/
+[id="toggle-heart"] {
+  position: absolute;
+  left: -100vw;
+}
+[for="toggle-heart"] {
+  color: #aab8c2;
+}
+
+[id="toggle-heart"]:checked + label {
+  color: #e2264d;
+}
+/* @keyframes heart {
+  0%,
+  17.5% {
+    font-size: 0;
+  }
+}
+
+[id="toggle-heart"]:checked + label {
+  will-change: font-size;
+  animation: heart 0.3s cubic-bezier(0.17, 0.89, 0.32, 1.49);
+} */

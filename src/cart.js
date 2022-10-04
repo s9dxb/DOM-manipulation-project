@@ -1,13 +1,13 @@
 let label = document.getElementById("label");
 let ShoppingCart = document.getElementById("shopping-cart");
 let basket = JSON.parse(localStorage.getItem("data")) || [];
-
+//Additionate the number of items to display it on the cart icon
 let calculation = () => {
   let cartIcon = document.getElementById("cartAmount");
   cartIcon.innerHTML = basket.map((x) => x.item).reduce((x, y) => x + y, 0);
 };
 calculation();
-
+//Adding data to the home page of the shopping cart
 let generateCartItems = () => {
   if (basket.length !== 0) {
     return (ShoppingCart.innerHTML = basket
@@ -50,7 +50,7 @@ let generateCartItems = () => {
   }
 };
 generateCartItems();
-
+//The increment function; will increase the number of items
 let increment = (id) => {
   let selectedItem = id;
   let search = basket.find((x) => x.id === selectedItem.id);
@@ -67,7 +67,7 @@ let increment = (id) => {
   generateCartItems();
   update(selectedItem.id);
 };
-
+//The decrement function; will decrease the number of items
 let decrement = (id) => {
   let selectedItem = id;
   let search = basket.find((x) => x.id === selectedItem.id);
@@ -83,7 +83,7 @@ let decrement = (id) => {
   generateCartItems();
   update(selectedItem.id);
 };
-
+//The update function; will update the amount of items onclick + or -
 let update = (id) => {
   let search = basket.find((x) => x.id === id);
   // console.log(search.item);
@@ -91,7 +91,7 @@ let update = (id) => {
   calculation();
   TotalAmount();
 };
-
+//To remove an item from the shopping cart
 let removeItem = (id) => {
   let selectedItem = id;
   //   console.log(selectedItem.id);
@@ -101,14 +101,14 @@ let removeItem = (id) => {
   TotalAmount();
   localStorage.setItem("data", JSON.stringify(basket));
 };
-
+//To empty the cart
 let clearCart = () => {
   basket = []; //what ever we have in the basket is gonna be removed by the ClearCart function
   generateCartItems();
   calculation();
   localStorage.setItem("data", JSON.stringify(basket));
 };
-
+//To display the total price and update it according to the number of items selected
 let TotalAmount = () => {
   if (basket.legth !== 0) {
     let amount = basket
